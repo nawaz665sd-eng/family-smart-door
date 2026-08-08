@@ -392,9 +392,38 @@ async function loadModels(){
 
 /* ---------- حفظ فرد ---------- */
 
-document
-.getElementById("save")
-.onclick=async()=>{
+document.getElementById("save").onclick = function () {
+
+    const name = document.getElementById("personName").value.trim();
+
+    if (name === "") {
+        alert("اكتب اسم الشخص أولاً");
+        return;
+    }
+
+    if (!selectedPhoto) {
+        alert("اختر صورة الشخص أولاً");
+        return;
+    }
+
+    const members = getMembers();
+
+    members.push({
+        name: name,
+        photo: selectedPhoto
+    });
+
+    saveMembers(members);
+    renderMembers();
+
+    document.getElementById("personName").value = "";
+    document.getElementById("personPhoto").value = "";
+    document.getElementById("preview").style.display = "none";
+
+    selectedPhoto = null;
+
+    alert("تم حفظ الفرد بنجاح ✅");
+};
 
  const name=
   document.getElementById("personName")
